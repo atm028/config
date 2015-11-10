@@ -8,6 +8,7 @@ set backspace=indent,eol,start
 "store lots of :cmdline history
 set history=1000
 
+set rnu
 set showcmd     "show incomplete cmds down the bottom
 set showmode    "show current mode down the bottom
 set showmatch   "show first pair break after enter the second one
@@ -61,9 +62,6 @@ set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
 set statusline+=\ %P    "percent through file
-
-set statusline+=%*
-set statusline+=%<%f%h%m%r%=%{strftime(\"%I:%M\")}\ %{&ff}\ %l,%c%V
 set laststatus=2
 
 set clipboard=unnamed
@@ -77,12 +75,12 @@ set ic
 let g:indexer_ctagsDontSpecifyFilesIfPossible = 1
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 nnoremap <silent>,v :tabnew $MYVIMRC<CR>
-nnoremap <silent>,t :NERDTreeToggle<cr>
+"nnoremap <silent>,t :NERDTreeToggle<cr>
 nnoremap <silent>,f :TlistToggle<cr>
 
-nnoremap <C-j> :tabnext<cr>
-nnoremap <C-k> :tabprevious<cr>
-nnoremap <C-m> :tabclose<cr>
+"nnoremap <C-j> :tabnext<cr>
+"nnoremap <C-k> :tabprevious<cr>
+"nnoremap <C-m> :tabclose<cr>
 
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
@@ -243,94 +241,151 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 "call vundle#scripts#reload()
-"
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/nerdtree.git'
-Plugin 'Buffergator'
-Plugin 'project.tar.gz'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'taglist.vim'
-Plugin 'snipmate'
 
-"let g:ycm_global_ycm_extra_conf = '/Volumes/Data/.ycm_extra_conf.py'
-"let g:ycm_key_invoke_completion = '<C-a>'
-hi SpellBad ctermfg=016 ctermbg=052 guifg=#5f0000 guibg=#000000
-hi SpellCap ctermfg=016 ctermbg=052 guifg=#5f0000 guibg=#000000
-nnoremap <C-w>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-filetype plugin indent on 
+filetype indent on 
 
 """"""""""""""""""""""""""""""""""""""""""""""
 "Vundle set repos
 " github
-
-Bundle 'scrooloose/syntastic'
-
-Bundle 'tpope/vim-fugitive'
+call vundle#begin()
+Plugin 'rking/ag.vim'
+Plugin 'MarcWeber/vim-addon-completion'
+Plugin 'kien/ctrlp.vim'
+Plugin 'DfrankUtil'
+Plugin 'EasyMotion'
+Plugin 'derekwyatt/vim-fswitch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'endel/vim-github-colorscheme'
+Plugin 'vim-scripts/gnupg.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'laurentgoudet/vim-howdoi'
+Plugin 'noahfrederick/vim-hemisu'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'elzr/vim-json'
+"Plugin 'scrooloose/nerdtree'
+Plugin 'derekwyatt/vim-npl'
+Plugin 'derekwyatt/vim-protodef'
+Plugin 'derekwyatt/vim-sbt'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-surround'
+Plugin 'godlygeek/tabular'
+Plugin 'vim-scripts/TwitVim'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'vimprj'
+Plugin 'VisIncr'
+Plugin 'GEverding/vim-hocon'
+Plugin 'xolox/vim-misc'
 Bundle 'lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-" vim-scripts
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'rails.vim'
-Bundle 'molokai'
+"Plugin 'Buffergator'
+Plugin 'Colorzone'
+Plugin 'Solarized'
+Plugin 'mattn/emmet-vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'drmingdrmer/xptemplate'
+Plugin 'bufkill.vim'
+Bundle 'taglist-plus'
+Bundle 'gmarik/vundle'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'ZenCoding'
+Plugin 'jceb/vim-orgmode'
+Plugin 'davidoc/taskpaper.vim'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'github-theme'
+call vundle#end()
+filetype plugin indent on
 
+"-----------------------------------------------------------------------------
+" ORG Mode settings
+"-----------------------------------------------------------------------------
+let g:org_todo_keywords=['TODO', 'IN_PRPGRESS', 'DONE']
+
+:-----------------------------------------------------------------------------
+" XPTemplate settings
+"-----------------------------------------------------------------------------
+set runtimepath+=~/.vim/xpt-personal
+let g:xptemplate_brace_complete = ''
+let g:xptemplate_key = '<C-\>'
+
+"-----------------------------------------------------------------------------
+" CtrlP Settings
+"-----------------------------------------------------------------------------
+let g:ctrlp_switch_buffer = 'E'
+let g:ctrlp_tabpage_position = 'c'
+let g:ctrlp_working_path_mode = 'rc'
+let g:ctrlp_root_markers = ['.project.root']
+let g:ctrlp_custom_ignore = '\v'
+let g:ctrlp_custom_ignore .= '%(/\.'
+let g:ctrlp_custom_ignore .= '%(git|hg|svn)|'
+let g:ctrlp_custom_ignore .= '\.%(class|o|png|jpg|jpeg|bmp|tar|jar|tgz|deb|zip|xml|html)$|'
+let g:ctrlp_custom_ignore .= '/target/%(quickfix|resolution-cache|streams)|'
+let g:ctrlp_custom_ignore .= '/target/scala-2.1./%(classes|test-classes|sbt-0.13|cache)|'
+let g:ctrlp_custom_ignore .= '/project/target|/project/project'
+let g:ctrlp_custom_ignore .= ')'
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_open_multiple_files = '1ri'
+let g:ctrlp_match_window = 'max:40'
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtSelectMove("j")':   ['<c-n>'],
+  \ 'PrtSelectMove("k")':   ['<c-p>'],
+  \ 'PrtHistory(-1)':       ['<c-j>', '<down>'],
+  \ 'PrtHistory(1)':        ['<c-i>', '<up>']
+\ }
+nmap ,fb :CtrlPBuffer<cr>
+nmap ,ff :CtrlP .<cr>
+nmap ,fF :execute ":CtrlP " . expand('%:p:h')<cr>
+nmap ,fr :CtrlP<cr>
+nmap ,fm :CtrlPMixed<cr>
+
+" Use the bufkill plugin to eliminate a buffer but keep the window layout
+nmap ,bd :BD<cr>
+
+
+
+let mapleader = '\'
+"YouCompleteMe
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""
 
 "turn on syntax highlighting
-syntax on
-filetype plugin indent on
+syntax enable
+
+au BufRead,BufNewFile *.scala set filetype=scala
+au! Syntax scala source ~/.vim/bundle/vim-scala/syntax/scala.vim
+au BufRead,BufNewFile *.sbt set filetype=sbt
+au! Syntax sbt source ~/.vim/bundle/vim-sbt/syntax/sbt.vim
+au BufRead,BufNewFile *.taskpaper set filetype=taskpaper
+au! Syntax taskpaper source ~/.vim/bundle/taskpaper.vim/syntax/taskpaper.vim
+
+"tell the term has 256 colors
+set t_Co=256
+set background=light
+let g:solarized_termcolors=256
+"colorscheme solarized
+"colorscheme PaperColor
+colorscheme github
+
 
 "some stuff to get the mouse going in term
 set mouse=a
 set ttymouse=xterm2
-set nu
-colorscheme molokai
 
-"tell the term has 256 colors
-set t_Co=256
 
 "hide buffers when not displayed
 set hidden
-
-highlight Pmenu ctermfg=green ctermbg=black
-highlight PmenuSel ctermfg=blue ctermbg=black
-highlight Search ctermfg=black ctermbg=green
-
-
-" Clang Complete Settings
-"" let g:clang_use_library=1
-"" let g:clang_complete_copen=1
-"" let g:clang_complete_macros=1
-"" let g:clang_complete_patterns=0
-"" let g:clang_memory_percent=70
-"" let g:clang_user_options=' -std=c++11 || exit 0'
-"" let g:clang_auto_select=1
-"" set conceallevel=2
-"" set concealcursor=vin
-"" let g:clang_snippets=1
-"" let g:clang_conceal_snippets=1
-"" let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-if isdirectory('/usr/include/c++/4.9.1')
-    set path+=/usr/include/c++/4.9.1
-    set path+=/usr/include/c++/4.9.1/tr1
-    set path+=/usr/include/c++/4.9.1/tr2
-endif
-
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
 
 """"""""""""""""Set font""""""""""""""""
 if has("gui")
   if has("win32")
     set guifont=Consolas:h16:cANSI
   endif
-  if has("unix")
-      set guifont=Lucida_COnsole:h14
-  endif
 endif
+set guifont=Monaco:h16
 
 
 "dont load csapprox if we no gui support - silences an annoying warning
@@ -342,9 +397,7 @@ map <F9> <Plug>ToggleProject
 imap <F9> <Plug>ToggleProject
 nmap <F9> <Plug>ToggleProject
 
-if has("win32")
-    map <F12> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-endif
+map <F12> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 
 """""""""""""""""CTags mapping""""""""""""""""""""""
 map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
@@ -385,9 +438,7 @@ let Tlist_Use_WinWidth=10
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-"build
-:nnoremap <F5> :<C-U>make %:r && ./%:r<CR>
-
+                                                    
 "make <c-l> clear the highlight as well as redraw
 nnoremap <C-L> :nohls<CR><C-L>
 inoremap <C-L> <C-O>:nohls<CR>
@@ -425,6 +476,14 @@ set completeopt=menuone,menu,longest,preview
 "    call ExtractSnips("~/.vim/snippets/html", "xhtml")
 "    call ExtractSnips("~/.vim/snippets/html", "php")
 "endfunction
+
+
+"Project build
+function! BiiMake()
+    execute "silent update"
+    execute 'echo system("bii cpp:build")'
+endfunction
+nnoremap <F7> : call BiiMake()<CR>
 
 "visual search mappings
 function! s:VSetSearch()
