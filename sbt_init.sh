@@ -7,7 +7,7 @@ echo 'name := "My Project"
 
 version := "1.0"
 
-sclaVersion := "2.10.0"
+scalaVersion := "2.10.0"
 
 libraryDependencies ++=Seq(
     specs2 % Test
