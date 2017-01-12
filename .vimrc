@@ -70,12 +70,17 @@ set guioptions-=m
 set guioptions-=T
 set guioptions-=r
 
+
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set list
+set listchars=tab:>-     " >
+
 set ic 
 "Tags
 let g:indexer_ctagsDontSpecifyFilesIfPossible = 1
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 nnoremap <silent>,v :tabnew $MYVIMRC<CR>
-"nnoremap <silent>,t :NERDTreeToggle<cr>
+nnoremap <silent>,t :NERDTreeToggle<cr>
 nnoremap <silent>,f :TlistToggle<cr>
 
 "nnoremap <C-j> :tabnext<cr>
@@ -262,7 +267,7 @@ Plugin 'laurentgoudet/vim-howdoi'
 Plugin 'noahfrederick/vim-hemisu'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'elzr/vim-json'
-"Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 Plugin 'derekwyatt/vim-npl'
 Plugin 'derekwyatt/vim-protodef'
 Plugin 'derekwyatt/vim-sbt'
@@ -296,6 +301,8 @@ Plugin 'jceb/vim-orgmode'
 Plugin 'davidoc/taskpaper.vim'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'github-theme'
+Plugin 'fatih/vim-go'
+Plugin 'Tagbar'
 call vundle#end()
 filetype plugin indent on
 
@@ -343,6 +350,7 @@ nmap ,fm :CtrlPMixed<cr>
 
 " Use the bufkill plugin to eliminate a buffer but keep the window layout
 nmap ,bd :BD<cr>
+nmap ,ss :shell<cr>
 
 
 
@@ -396,6 +404,8 @@ endif
 map <F9> <Plug>ToggleProject
 imap <F9> <Plug>ToggleProject
 nmap <F9> <Plug>ToggleProject
+
+nmap <F8> :TagbarToggle<CR>
 
 map <F12> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 
