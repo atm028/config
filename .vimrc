@@ -277,7 +277,9 @@ Plugin 'tpope/vim-surround'
 Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/TwitVim'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'vimprj'
+"Plugin 'vimprj'
+Plugin 'amiorin/vim-project' 
+"Plugin 'project'
 Plugin 'VisIncr'
 Plugin 'GEverding/vim-hocon'
 Plugin 'xolox/vim-misc'
@@ -302,7 +304,18 @@ Plugin 'davidoc/taskpaper.vim'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'github-theme'
 Plugin 'fatih/vim-go'
+Plugin 'vim-monokai'
+
 Plugin 'Tagbar'
+let g:airline#extensions#tagbar#flags = 'f'
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+
+Plugin 'mhinz/vim-startify'
+
+Plugin 'ctags.vim'
+"let g:ctags_statusline=1
+"let g:ctags_regenerate=1
+
 call vundle#end()
 filetype plugin indent on
 
@@ -317,6 +330,15 @@ let g:org_todo_keywords=['TODO', 'IN_PRPGRESS', 'DONE']
 set runtimepath+=~/.vim/xpt-personal
 let g:xptemplate_brace_complete = ''
 let g:xptemplate_key = '<C-\>'
+
+"vim-project confgure
+let g:project_enable_welcome = 1
+let g:project_use_nerdtree = 1
+set rtp+=~/.vim/bundle/vim-project/
+" custom starting path
+" call project#rc("/Volume/Data/Project/")
+" default starting path (the home directory)
+call project#rc()
 
 "-----------------------------------------------------------------------------
 " CtrlP Settings
@@ -370,13 +392,17 @@ au! Syntax sbt source ~/.vim/bundle/vim-sbt/syntax/sbt.vim
 au BufRead,BufNewFile *.taskpaper set filetype=taskpaper
 au! Syntax taskpaper source ~/.vim/bundle/taskpaper.vim/syntax/taskpaper.vim
 
+
+"""""" Color theme
 "tell the term has 256 colors
 set t_Co=256
+"set background=dark
 set background=light
 let g:solarized_termcolors=256
 "colorscheme solarized
+colorscheme monokai
 "colorscheme PaperColor
-colorscheme github
+"colorscheme github
 
 
 "some stuff to get the mouse going in term
@@ -489,11 +515,11 @@ set completeopt=menuone,menu,longest,preview
 
 
 "Project build
-function! BiiMake()
-    execute "silent update"
-    execute 'echo system("bii cpp:build")'
-endfunction
-nnoremap <F7> : call BiiMake()<CR>
+" Command Make will call make and then cwindow which
+" opens a 3 line error window if any errors are found.
+" If no errors, it closes any open cwindow.
+:command! -nargs=* CMake make <args> | cwindow 3
+nnoremap <F7> :CMake<CR>
 
 "visual search mappings
 function! s:VSetSearch()
