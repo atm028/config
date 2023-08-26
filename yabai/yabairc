@@ -1,0 +1,48 @@
+#color["focused"]="0xE0808080"
+#color["normal"]="0x00010101"
+#color["preselect"]="0xE02d74da"
+
+yabai -m config window_border on | off
+yabai -m config window_border_width 3
+yabai -m config active_window_border_color 0xff990339
+yabai -m config normal_window_border_color 0xff555555
+
+yabai -m window --toggle border
+yabai -m rule --add app=Terminal border=off
+
+# bsp, stack of float
+yabai -m config layout bsp
+
+yabai -m config window_placement second_child
+
+# padding
+yabay -m config top_padding 12
+yabay -m config bottom_padding 12
+yabay -m config left_padding 12
+yabay -m config right_padding 12
+yabay -m config window_gap 12
+
+# mouse settings
+yabai -m config mouse_follows_focus on
+
+yabai -m config mouse_modifier alt
+# left click + drag
+yabai -m config mouse_action1 move
+# right click + drag
+yabai -m config mouse_action2 resize
+
+yabai -m mouse_drop_action swap
+
+# Disable specific apps
+yabai -m rule --add app="^System settings$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add title='Settings$' manage=off
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add title='Preferences$' manage=off
+yabai -m rule --add title='^Archive Utility$' manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Disk Utility$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="^Path Finder$" manage=off
+yabai -m rule --add app="^1Password 7$" manage=off
