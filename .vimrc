@@ -76,6 +76,9 @@ set list
 set listchars=tab:>-     " >
 
 set ic 
+
+
+" ======== MAPS =======
 "Tags
 let g:indexer_ctagsDontSpecifyFilesIfPossible = 1
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
@@ -86,6 +89,63 @@ nnoremap <silent>,f :TlistToggle<cr>
 "nnoremap <C-j> :tabnext<cr>
 "nnoremap <C-k> :tabprevious<cr>
 "nnoremap <C-m> :tabclose<cr>
+noremap <C-o> :MaximizerToggle<cr>
+
+nmap ,fb :CtrlPBuffer<cr>
+nmap ,ff :CtrlP .<cr>
+nmap ,fF :execute ":CtrlP " . expand('%:p:h')<cr>
+nmap ,fr :CtrlP<cr>
+nmap ,fm :CtrlPMixed<cr>
+
+" Use the bufkill plugin to eliminate a buffer but keep the window layout
+nmap ,bd :BD<cr>
+nmap ,ss :shell<cr>
+
+
+let mapleader = '\'
+"YouCompleteMe
+"nnoremap <leader>jd :YcmCompleter GoTo<CR>
+
+
+"""""""""""""""""CTags mapping""""""""""""""""""""""
+map  <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+"map  <F9> <Plug>ToggleProject
+"imap <F9> <Plug>ToggleProject
+"nmap <F9> <Plug>ToggleProject
+"nmap <F8> :TagbarToggle<CR>
+"map  <F12> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+
+"make <c-l> clear the highlight as well as redraw
+nnoremap <C-L> :nohls<CR><C-L>
+inoremap <C-L> <C-O>:nohls<CR>
+
+"map to fuzzy finder text mate stylez
+nnoremap <c-f> :FuzzyFinderTextMate<CR>
+
+"map Q to something useful
+noremap Q gq
+
+"make Y consistent with C and D
+nnoremap Y y$
+
+"Project build
+" Command Make will call make and then cwindow which
+" opens a 3 line error window if any errors are found.
+" If no errors, it closes any open cwindow.
+:command! -nargs=* CMake make <args> | cwindow 3
+nnoremap <F7> :CMake<CR>
+
+"visual search mappings
+function! s:VSetSearch()
+    let temp = @@
+    norm! gvy
+    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+    let @@ = temp
+endfunction
+"vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
+"vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
+
+" ===== END MAPS =======
 
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
@@ -243,7 +303,7 @@ filetype plugin on
 filetype off
 
 "setup vundle
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 "call vundle#scripts#reload()
 
@@ -263,7 +323,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'endel/vim-github-colorscheme'
 Plugin 'vim-scripts/gnupg.vim'
 Plugin 'sjl/gundo.vim'
-Plugin 'laurentgoudet/vim-howdoi'
+" Plugin 'laurentgoudet/vim-howdoi'
 Plugin 'noahfrederick/vim-hemisu'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'elzr/vim-json'
@@ -297,7 +357,7 @@ Plugin 'drmingdrmer/xptemplate'
 Plugin 'bufkill.vim'
 Bundle 'taglist-plus'
 Bundle 'gmarik/vundle'
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'ZenCoding'
 Plugin 'jceb/vim-orgmode'
 Plugin 'davidoc/taskpaper.vim'
@@ -364,22 +424,6 @@ let g:ctrlp_prompt_mappings = {
   \ 'PrtHistory(-1)':       ['<c-j>', '<down>'],
   \ 'PrtHistory(1)':        ['<c-i>', '<up>']
 \ }
-nmap ,fb :CtrlPBuffer<cr>
-nmap ,ff :CtrlP .<cr>
-nmap ,fF :execute ":CtrlP " . expand('%:p:h')<cr>
-nmap ,fr :CtrlP<cr>
-nmap ,fm :CtrlPMixed<cr>
-
-" Use the bufkill plugin to eliminate a buffer but keep the window layout
-nmap ,bd :BD<cr>
-nmap ,ss :shell<cr>
-
-
-
-let mapleader = '\'
-"YouCompleteMe
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-
 """"""""""""""""""""""""""""""""""""""""""""""
 
 "turn on syntax highlighting
@@ -395,14 +439,28 @@ au! Syntax taskpaper source ~/.vim/bundle/taskpaper.vim/syntax/taskpaper.vim
 
 """""" Color theme
 "tell the term has 256 colors
-set t_Co=256
-"set background=dark
-set background=light
+"set t_Co=256
 let g:solarized_termcolors=256
 "colorscheme solarized
-colorscheme monokai
-"colorscheme PaperColor
 "colorscheme github
+colorscheme PaperColor
+
+"colo seoul256
+" Light color scheme
+"colo seoul256-light
+
+" Switch
+set background=dark
+"set background=light
+
+
+"Cursor
+highlight Cursor guifg=white guibg=black
+highlight iCursor guifg=white guibg=steelblue
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
 
 
 "some stuff to get the mouse going in term
@@ -426,17 +484,6 @@ set guifont=Monaco:h16
 if !has("gui")
     let g:CSApprox_loaded = 1
 endif
-
-map <F9> <Plug>ToggleProject
-imap <F9> <Plug>ToggleProject
-nmap <F9> <Plug>ToggleProject
-
-nmap <F8> :TagbarToggle<CR>
-
-map <F12> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
-
-"""""""""""""""""CTags mapping""""""""""""""""""""""
-map <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
 function! GenerateTagsFile()
   if (!filereadable("tags"))
@@ -475,19 +522,6 @@ let Tlist_Use_WinWidth=10
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
                                                     
-"make <c-l> clear the highlight as well as redraw
-nnoremap <C-L> :nohls<CR><C-L>
-inoremap <C-L> <C-O>:nohls<CR>
-
-"map to fuzzy finder text mate stylez
-nnoremap <c-f> :FuzzyFinderTextMate<CR>
-
-"map Q to something useful
-noremap Q gq
-
-"make Y consistent with C and D
-nnoremap Y y$
-
 "mark syntax errors with :signs
 let g:syntastic_enable_signs=1
 
@@ -495,41 +529,6 @@ let g:syntastic_enable_signs=1
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
-
-
-"snipmate setup
-"source ~/.vim/snippets/support_functions.vim
-"autocmd vimenter * call s:SetupSnippets()
-"function! s:SetupSnippets()
-
-    "if we're in a rails env then read in the rails snippets
-"    if filereadable("./config/environment.rb")
-"        call ExtractSnips("~/.vim/snippets/ruby-rails", "ruby")
-"        call ExtractSnips("~/.vim/snippets/eruby-rails", "eruby")
-"    endif
-
-"    call ExtractSnips("~/.vim/snippets/html", "eruby")
-"    call ExtractSnips("~/.vim/snippets/html", "xhtml")
-"    call ExtractSnips("~/.vim/snippets/html", "php")
-"endfunction
-
-
-"Project build
-" Command Make will call make and then cwindow which
-" opens a 3 line error window if any errors are found.
-" If no errors, it closes any open cwindow.
-:command! -nargs=* CMake make <args> | cwindow 3
-nnoremap <F7> :CMake<CR>
-
-"visual search mappings
-function! s:VSetSearch()
-    let temp = @@
-    norm! gvy
-    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-    let @@ = temp
-endfunction
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR>
 
 
 "jump to last cursor position when opening a file
@@ -561,5 +560,4 @@ if len(glob( getcwd() . '/*.xcodeproj' )) > 0
         let &makeprg = 'xcodebuild'
 endif
 
-"Settings for OMNI
 
