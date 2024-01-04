@@ -79,6 +79,7 @@ set ic
 
 
 " ======== MAPS =======
+let mapleader = '\'
 "Tags
 let g:indexer_ctagsDontSpecifyFilesIfPossible = 1
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
@@ -86,9 +87,9 @@ nnoremap <silent>,v :tabnew $MYVIMRC<CR>
 nnoremap <silent>,t :NERDTreeToggle<cr>
 nnoremap <silent>,f :TlistToggle<cr>
 
-"nnoremap <C-j> :tabnext<cr>
-"nnoremap <C-k> :tabprevious<cr>
-"nnoremap <C-m> :tabclose<cr>
+nnoremap <C-j> :tabnext<cr>
+nnoremap <C-k> :tabprevious<cr>
+nnoremap <C-m> :tabclose<cr>
 noremap <C-o> :MaximizerToggle<cr>
 
 nmap ,fb :CtrlPBuffer<cr>
@@ -97,12 +98,14 @@ nmap ,fF :execute ":CtrlP " . expand('%:p:h')<cr>
 nmap ,fr :CtrlP<cr>
 nmap ,fm :CtrlPMixed<cr>
 
+nmap <leader>fb :Buffers<cr>
+nmap <leader>ff :Files ./<cr>
+
 " Use the bufkill plugin to eliminate a buffer but keep the window layout
 nmap ,bd :BD<cr>
 nmap ,ss :shell<cr>
 
 
-let mapleader = '\'
 "YouCompleteMe
 "nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
@@ -317,54 +320,45 @@ Plugin 'rking/ag.vim'
 Plugin 'MarcWeber/vim-addon-completion'
 Plugin 'kien/ctrlp.vim'
 Plugin 'DfrankUtil'
-Plugin 'EasyMotion'
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'tpope/vim-fugitive'
+Plugin 'EasyMotion' "never used this plugin, review
+Plugin 'derekwyatt/vim-fswitch' "not used
+Plugin 'tpope/vim-fugitive' "Git tool
 Plugin 'endel/vim-github-colorscheme'
 Plugin 'vim-scripts/gnupg.vim'
-Plugin 'sjl/gundo.vim'
-" Plugin 'laurentgoudet/vim-howdoi'
-Plugin 'noahfrederick/vim-hemisu'
-Plugin 'nanotech/jellybeans.vim'
+Plugin 'sjl/gundo.vim' "cool undo tree plugin but doesn't work
 Plugin 'elzr/vim-json'
 Plugin 'scrooloose/nerdtree'
 Plugin 'derekwyatt/vim-npl'
 Plugin 'derekwyatt/vim-protodef'
-Plugin 'derekwyatt/vim-sbt'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-surround'
-Plugin 'godlygeek/tabular'
-Plugin 'vim-scripts/TwitVim'
+Plugin 'tpope/vim-surround' "change \" -> \'
+Plugin 'godlygeek/tabular' "https://devhints.io/tabular
 Plugin 'tpope/vim-unimpaired'
-"Plugin 'vimprj'
-Plugin 'amiorin/vim-project' 
-"Plugin 'project'
 Plugin 'VisIncr'
 Plugin 'GEverding/vim-hocon'
 Plugin 'xolox/vim-misc'
 Bundle 'lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 Bundle 'L9'
-Bundle 'FuzzyFinder'
-Bundle 'rails.vim'
-"Plugin 'Buffergator'
+
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
+
 Plugin 'Colorzone'
 Plugin 'Solarized'
 Plugin 'mattn/emmet-vim'
 Plugin 'rizzatti/dash.vim'
-Plugin 'drmingdrmer/xptemplate'
+Plugin 'drmingdrmer/xptemplate' "code templates, never used it so it questionable
 Plugin 'bufkill.vim'
 Bundle 'taglist-plus'
 Bundle 'gmarik/vundle'
-"Bundle 'Valloric/YouCompleteMe'
 Bundle 'ZenCoding'
-Plugin 'jceb/vim-orgmode'
 Plugin 'davidoc/taskpaper.vim'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'github-theme'
 Plugin 'fatih/vim-go'
 Plugin 'vim-monokai'
+Plugin 'vim-maximizer'
 
 Plugin 'Tagbar'
 let g:airline#extensions#tagbar#flags = 'f'
@@ -465,7 +459,7 @@ set guicursor+=i:blinkwait10
 
 "some stuff to get the mouse going in term
 set mouse=a
-set ttymouse=xterm2
+"set ttymouse=xterm2
 
 
 "hide buffers when not displayed
