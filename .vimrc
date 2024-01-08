@@ -99,7 +99,7 @@ nmap ,fr :CtrlP<cr>
 nmap ,fm :CtrlPMixed<cr>
 
 nmap <leader>fb :Buffers<cr>
-nmap <leader>ff :Files ./<cr>
+nmap <leader>ff :Files<cr>
 
 " Use the bufkill plugin to eliminate a buffer but keep the window layout
 nmap ,bd :BD<cr>
@@ -343,6 +343,7 @@ Bundle 'L9'
 
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
+Plugin 'airblade/vim-rooter' "make sure that fzf looking at the root of the project
 
 Plugin 'Colorzone'
 Plugin 'Solarized'
@@ -444,8 +445,8 @@ colorscheme PaperColor
 "colo seoul256-light
 
 " Switch
-set background=dark
-"set background=light
+"set background=dark
+set background=light
 
 
 "Cursor
