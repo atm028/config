@@ -100,6 +100,7 @@ nmap ,fm :CtrlPMixed<cr>
 
 nmap <leader>fb :Buffers<cr>
 nmap <leader>ff :Files<cr>
+nmap <leader>fm :Marks<cr>
 
 " Use the bufkill plugin to eliminate a buffer but keep the window layout
 nmap ,bd :BD<cr>
@@ -119,17 +120,17 @@ map  <F4> [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 "map  <F12> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 
 "make <c-l> clear the highlight as well as redraw
-nnoremap <C-L> :nohls<CR><C-L>
-inoremap <C-L> <C-O>:nohls<CR>
+"nnoremap <C-L> :nohls<CR><C-L>
+"inoremap <C-L> <C-O>:nohls<CR>
 
 "map to fuzzy finder text mate stylez
-nnoremap <c-f> :FuzzyFinderTextMate<CR>
+"nnoremap <c-f> :FuzzyFinderTextMate<CR>
 
 "map Q to something useful
-noremap Q gq
+"noremap Q gq
 
 "make Y consistent with C and D
-nnoremap Y y$
+"nnoremap Y y$
 
 "Project build
 " Command Make will call make and then cwindow which
