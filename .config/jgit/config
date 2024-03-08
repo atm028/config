@@ -1,0 +1,6 @@
+[filesystem "Eclipse Adoptium|11.0.14.1|/dev/disk3s5"]
+	timestampResolution = 27000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
+[filesystem "Amazon.com Inc.|17.0.10|/dev/disk3s5"]
+	timestampResolution = 3000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
