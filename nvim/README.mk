@@ -1,0 +1,13 @@
+- [x] relativenumbering and line where the cursor is show the actual number
+- nvim-tree
+- fzf
+	- search files
+	- live grep
+- jdtls
+- git
+- [x] tabs: next tab/prev tab
+- markdown
+- LSP
+	- JS/TS
+	- Python
+	- Java

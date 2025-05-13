@@ -6,7 +6,9 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xffbe4fc1 width=5.0'
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -48,12 +50,12 @@ on-focus-changed = 'move-mouse window-lazy-center'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 10
-inner.vertical =   10
-outer.left =       10
-outer.bottom =     10
-outer.top =        10
-outer.right =      10
+inner.horizontal = 0
+inner.vertical =   0
+outer.left =       0
+outer.bottom =     0
+outer.top =        0
+outer.right =      0
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -110,6 +112,7 @@ alt-shift-equal = 'resize smart +50'
 # alt-shift-r = 'mode resize'
 
 alt-shift-f = 'fullscreen'
+# alt-shift-f = 'macos-native-fullscreen'
 
 ctrl-shift-z = 'exec-and-forget aerospace focus-monitor 1'
 ctrl-shift-x = 'exec-and-forget aerospace focus-monitor 2'
@@ -130,6 +133,7 @@ alt-b = 'workspace B' # browsers on monitor 2
 alt-m = 'workspace M' # messengers and outlook
 alt-t = 'workspace T' # iTerm
 alt-z = 'workspace Z' # zotero
+alt-p = 'workspace P' # desktop for temporary usage
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
@@ -144,8 +148,10 @@ alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-a = 'move-node-to-workspace A'
 alt-shift-b = 'move-node-to-workspace B'
 alt-shift-m = 'move-node-to-workspace M'
+alt-shift-t = 'move-node-to-workspace T'
 alt-shift-u = 'move-node-to-workspace U'
 alt-shift-z = 'move-node-to-workspace Z'
+alt-shift-p = 'move-node-to-workspace P'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -195,7 +201,7 @@ if.app-id = 'com.1password.1password'
 run = 'move-node-to-workspace A'
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
-run = 'move-node-to-workspace 4'
+run = 'move-node-to-workspace Z'
 [[on-window-detected]]
 if.app-id = 'com.sublimetext.4'
 run = 'move-node-to-workspace A'
@@ -216,8 +222,13 @@ if.app-id = 'net.whatsapp.WhatsApp'
 run = 'move-node-to-workspace M'
 [[on-window-detected]]
 if.app-id = 'com.kapeli.dashdoc'
-run = 'move-node-to-workspace Z'
-
+run = 'move-node-to-workspace T'
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
+run = 'move-node-to-workspace T'
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace T'
 
 [workspace-to-monitor-force-assignment]
 1 = 2 
